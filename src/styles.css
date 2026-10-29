@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens Burkindi Soft Consulting.
+ * Valeurs relevées au pixel sur la maquette Burkindi_Soft_Consulting_Apercu_Site_Web_HD.pdf.
+ */
+@theme {
+  --font-sans: 'Lato', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Bleu d'interface : boutons, liens, bandeau statistiques. */
+  --color-brand-50: #f0f6ff;
+  --color-brand-100: #e7edff;
+  --color-brand-200: #c9d5ff;
+  --color-brand-400: #4f6ae0;
+  --color-brand-500: #1a3ad8;
+  --color-brand-600: #092fd0;
+  --color-brand-700: #092cc3;
+  --color-brand-800: #081abc;
+
+  /* Rouge d'accentuation : mots-clés, sur-titres, CTA final. */
+  --color-accent-50: #fff1f0;
+  --color-accent-500: #f13637;
+  --color-accent-600: #e6332a;
+
+  /* Navy : titres et fonds sombres. */
+  --color-ink-900: #041837;
+  --color-ink-800: #071b3b;
+  --color-ink-700: #081b3e;
+  --color-ink-400: #596985;
+
+  /* Fonds de sections clairs. */
+  --color-mist-50: #fbfdff;
+  --color-mist-100: #f6f9ff;
+  --color-mist-200: #edf6ff;
+
+  --color-success-50: #e9f8e9;
+  --color-success-600: #1a9b54;
+
+  /* Vert de marque WhatsApp. */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  /* La barre d'en-tête est collante : on décale les ancres pour ne pas passer dessous. */
+  :target {
+    scroll-margin-top: 7rem;
+  }
+
+  body {
+    color: var(--color-ink-400);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink-700);
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
