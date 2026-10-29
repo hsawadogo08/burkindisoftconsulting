@@ -262,31 +262,31 @@ export class SiteContentService {
         "Pilotage précis de la performance de l'établissement",
       ],
     },
-    {
-      slug: 'kalansys',
-      name: 'KalanSys',
-      category: 'Gestion scolaire',
-      description: "Toute la gestion de votre établissement scolaire dans une seule plateforme.",
-      tag: 'Éducation',
-      logo: { src: '/solutions/kalansys_web.png', alt: 'Logo KalanSys', width: 299, height: 128 },
-      tone: 'brand',
-      // Contenu repris de la brochure kalansys-brochure-v2.pdf.
-      summary:
-        'Simplifiez vos opérations quotidiennes, automatisez votre administration et pilotez votre établissement avec une solution moderne et performante.',
-      features: [
-        'Élèves, parents et inscriptions centralisés',
-        'Enseignants, classes et emplois du temps',
-        'Évaluations, notes, bulletins et délibérations',
-        'Paiements scolaires, caisse et comptabilité',
-        'Documents scolaires, tableaux de bord et rapports automatiques',
-      ],
-      benefits: [
-        'Automatisation des tâches administratives répétitives',
-        'Informations centralisées et faciles à retrouver',
-        'Suivi en temps réel des paiements, impayés et trésorerie',
-        'Bulletins, statistiques et documents produits en quelques clics',
-      ],
-    },
+    // {
+    //   slug: 'kalansys',
+    //   name: 'KalanSys',
+    //   category: 'Gestion scolaire',
+    //   description: "Toute la gestion de votre établissement scolaire dans une seule plateforme.",
+    //   tag: 'Éducation',
+    //   logo: { src: '/solutions/kalansys_web.png', alt: 'Logo KalanSys', width: 299, height: 128 },
+    //   tone: 'brand',
+    //   // Contenu repris de la brochure kalansys-brochure-v2.pdf.
+    //   summary:
+    //     'Simplifiez vos opérations quotidiennes, automatisez votre administration et pilotez votre établissement avec une solution moderne et performante.',
+    //   features: [
+    //     'Élèves, parents et inscriptions centralisés',
+    //     'Enseignants, classes et emplois du temps',
+    //     'Évaluations, notes, bulletins et délibérations',
+    //     'Paiements scolaires, caisse et comptabilité',
+    //     'Documents scolaires, tableaux de bord et rapports automatiques',
+    //   ],
+    //   benefits: [
+    //     'Automatisation des tâches administratives répétitives',
+    //     'Informations centralisées et faciles à retrouver',
+    //     'Suivi en temps réel des paiements, impayés et trésorerie',
+    //     'Bulletins, statistiques et documents produits en quelques clics',
+    //   ],
+    // },
     {
       slug: 'assocflow',
       name: 'AssocFlow',

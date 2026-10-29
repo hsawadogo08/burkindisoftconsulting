@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "build:prod": "ng build --configuration production && npm run sitemap",
+    "deploy:zip": "npm run build:prod && rm -f dist/site.zip && cd dist/burkindisoftconsulting/browser && zip -r -q ../../site.zip . && echo \"✓ dist/site.zip prêt à être téléversé dans public_html\""
   },
   "prettier": {
     "printWidth": 100,
@@ -27,7 +30,9 @@
     "@angular/core": "^20.3.0",
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
+    "@angular/platform-server": "^20.3.34",
     "@angular/router": "^20.3.0",
+    "@angular/ssr": "^20.3.42",
     "@lucide/angular": "^1.63.0",
     "@tailwindcss/postcss": "^4.3.3",
     "gsap": "^3.15.0",
