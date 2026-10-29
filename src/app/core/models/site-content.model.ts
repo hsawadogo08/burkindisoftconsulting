@@ -145,3 +145,9 @@ export interface ContactDetail {
   readonly icon: LucideIcon;
   readonly href?: string;
 }
+
+/** Mention légale du pied de page, pointant vers une page dédiée. */
+export interface LegalLink {
+  readonly label: string;
+  readonly path: string;
+}

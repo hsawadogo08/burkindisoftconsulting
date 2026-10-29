@@ -20,5 +20,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/solutions/solution-detail').then((m) => m.SolutionDetail),
   },
+  // Pages légales : déclarées avant le joker, sinon il les intercepterait.
+  {
+    path: 'confidentialite',
+    title: 'Politique de confidentialité — Burkindi Soft Consulting',
+    loadComponent: () => import('./features/legal/privacy').then((m) => m.Privacy),
+  },
+  {
+    path: 'mentions-legales',
+    title: 'Mentions légales — Burkindi Soft Consulting',
+    loadComponent: () => import('./features/legal/legal-notice').then((m) => m.LegalNotice),
+  },
   { path: '**', redirectTo: '' },
 ];

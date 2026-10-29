@@ -34,6 +34,7 @@ import {
   ExpertiseDomain,
   FooterColumn,
   KeyFigure,
+  LegalLink,
   NavLink,
   Partner,
   Pillar,
@@ -72,10 +73,10 @@ export class SiteContentService {
   readonly heroCta = 'Donnons vie à vos projets';
 
   readonly heroImage = {
-    src: '/images/hero-consultant.jpg',
-    alt: "Consultant Burkindi Soft Consulting au travail sur son ordinateur portable",
-    width: 1200,
-    height: 800,
+    src: '/images/hero-consultant.webp',
+    alt: "Consultante Burkindi Soft Consulting au travail sur son ordinateur portable",
+    width: 1536,
+    height: 1024,
   };
 
   readonly pillars: readonly Pillar[] = [
@@ -685,7 +686,10 @@ export class SiteContentService {
   /** Centre la carte sur Ouagadougou. L’embed public ne requiert aucune clé API. */
   readonly mapTitle = 'Carte de Ouagadougou, Burkina Faso';
 
-  readonly legalLinks: readonly string[] = ['Confidentialité', 'Mentions légales'];
+  readonly legalLinks: readonly LegalLink[] = [
+    { label: 'Confidentialité', path: '/confidentialite' },
+    { label: 'Mentions légales', path: '/mentions-legales' },
+  ];
 
   readonly copyright = `© ${new Date().getFullYear()} Burkindi Soft Consulting. Tous droits réservés.`;
 }

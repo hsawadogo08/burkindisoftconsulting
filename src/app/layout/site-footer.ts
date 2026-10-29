@@ -73,9 +73,14 @@ import { BrandLogo } from '../shared/ui/brand-logo';
       >
         <p>{{ content.copyright }}</p>
         <ul class="flex items-center gap-3">
-          @for (legal of content.legalLinks; track legal; let last = $last) {
+          @for (legal of content.legalLinks; track legal.path; let last = $last) {
             <li class="flex items-center gap-3">
-              <span>{{ legal }}</span>
+              <a
+                [routerLink]="legal.path"
+                class="transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                {{ legal.label }}
+              </a>
               @if (!last) {
                 <span aria-hidden="true" class="text-white/20">|</span>
               }

@@ -215,8 +215,8 @@ type SubmitStatus = 'idle' | 'invalid' | 'opened';
                 @switch (status()) {
                   @case ('opened') {
                     <span class="block rounded-xl bg-success-50 p-4 text-success-600">
-                      Votre messagerie s'est ouverte avec le message pré-rempli. Si rien ne se passe,
-                      écrivez-nous directement à
+                      Votre messagerie s'est ouverte avec le message pré-rempli. Si rien ne se
+                      passe, écrivez-nous directement à
                       <a [href]="'mailto:' + content.contactEmail" class="font-bold underline">
                         {{ content.contactEmail }}</a
                       >.
@@ -236,13 +236,55 @@ type SubmitStatus = 'idle' | 'invalid' | 'opened';
     </section>
 
     <section aria-label="Localisation" class="bg-mist-100">
-      <iframe
-        [title]="content.mapTitle"
-        src="https://www.google.com/maps?q=Ouagadougou,Burkina+Faso&amp;hl=fr&amp;z=12&amp;output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        class="block h-80 w-full border-0 lg:h-96"
-      ></iframe>
+      @if (isMapVisible()) {
+        <!--
+          referrerpolicy="no-referrer" : Google n'a pas besoin de savoir
+          depuis quelle page la carte est ouverte. allow="" coupe toute
+          délégation de permission (géolocalisation, caméra) au document tiers.
+
+          Pas de sandbox : l'embed Google Maps exige allow-scripts et
+          allow-same-origin simultanément, ce qui annulerait le bénéfice de
+          l'isolation tout en risquant de casser le rendu.
+        -->
+        <iframe
+          [title]="content.mapTitle"
+          src="https://www.google.com/maps?q=Ouagadougou,Burkina+Faso&amp;hl=fr&amp;z=12&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          allow=""
+          class="block h-80 w-full border-0 lg:h-96"
+        ></iframe>
+      } @else {
+        <!--
+          Chargement au clic : l'iframe Google établissait sa connexion dès
+          l'arrivée sur la page, donc avant tout consentement. Le substitut
+          occupe exactement la même hauteur, aucun décalage de mise en page au
+          moment du remplacement.
+        -->
+        <div
+          class="flex h-80 w-full flex-col items-center justify-center gap-4 px-6 text-center lg:h-96"
+        >
+          <span [class]="contactIconClass">
+            <svg lucideMapPin class="size-5" [strokeWidth]="2" />
+          </span>
+
+          <p class="text-lg font-bold text-ink-700">{{ content.contactAddress }}</p>
+
+          <p class="max-w-lg text-ink-400">
+            La carte est fournie par Google Maps. L'afficher ouvre une connexion vers Google, qui
+            recevra alors votre adresse IP.
+          </p>
+
+          <button
+            type="button"
+            (click)="showMap()"
+            class="mt-2 inline-flex items-center justify-center gap-3 rounded-xl bg-brand-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-brand-600/25 transition hover:bg-brand-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 motion-safe:active:scale-[0.98]"
+          >
+            Afficher la carte
+            <svg lucideMapPin class="size-5" [strokeWidth]="2" />
+          </button>
+        </div>
+      }
     </section>
   `,
 })
@@ -253,6 +295,9 @@ export class ContactSection {
 
   protected readonly messageMaxLength = MESSAGE_MAX_LENGTH;
   protected readonly status = signal<SubmitStatus>('idle');
+
+  /** Faux tant que le visiteur n'a pas demandé la carte : aucun appel à Google. */
+  protected readonly isMapVisible = signal(false);
 
   protected readonly form = this.formBuilder.nonNullable.group({
     fullName: ['', [Validators.required, Validators.minLength(2)]],
@@ -277,6 +322,10 @@ export class ContactSection {
 
   protected readonly contactLinkClass =
     'mt-0.5 block text-ink-400 transition-colors hover:text-brand-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600';
+
+  protected showMap(): void {
+    this.isMapVisible.set(true);
+  }
 
   /** Une erreur ne s'affiche qu'une fois le champ quitté ou le formulaire soumis. */
   protected isInvalid(controlName: string): boolean {
